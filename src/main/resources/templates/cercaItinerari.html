@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerari</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="/css/cercaItinerario.css">
+
+</head>
+<body class="cercaItinerario-page">
+<header>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="navbar-left">
+                <a href="/utente/index" class="navbar-logo">TripHub</a>
+            </div>
+            <div class="navbar-center">
+                <a href="/utente/index" class="navbar-home">Home</a>
+                <a href="/utente/profilo" class="navbar-home">Profilo</a>
+                <a href="/utente/destinazioni" class="navbar-home">Destinazioni</a>
+
+            </div>
+            <div class="navbar-right">
+                <a href="/logout" class="navbar-logout-button">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="header-box">
+    <h1>Itinerari</h1>
+</div>
+<div class="overlay">
+    <div class="main-content">
+        <div class="main-content-text">
+            <h1>Per quanti giorni partirai?</h1>
+            <div class="search-bar">
+                <input type="number" id="searchInput" placeholder="Inserisci numero di giorni...">
+            </div>
+        </div>
+        <div id="itinerariContainer" class="itinerari-container">
+            <!-- Esempio di card itinerario. Da generare dinamicamente con Thymeleaf -->
+            <div th:each="itinerario : ${itinerari}" th:data-numgiorni="${itinerario.numgiorni}" th:data-id="${itinerario.id}" class="itinerario-card" onclick="redirectToItinerary(this)">
+                <h3 th:text="${itinerario.nome}">Nome Itinerario</h3>
+                <p th:text="${itinerario.descrizione}">Descrizione Itinerario</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    document.getElementById('searchInput').addEventListener('input', function(event) {
+        var numgiorni = event.target.value;
+        var itinerari = document.querySelectorAll('.itinerario-card');
+
+        itinerari.forEach(function(itinerario) {
+            var itinerarioNumGiorni = itinerario.getAttribute('data-numgiorni');
+            if (numgiorni === '' || itinerarioNumGiorni == numgiorni) {
+                itinerario.style.display = 'block';
+            } else {
+                itinerario.style.display = 'none';
+            }
+        });
+    });
+
+    function redirectToItinerary(element) {
+        var itinerarioId = element.getAttribute('data-id');
+        window.location.href = '/utente/itinerario/' + itinerarioId;
+    }
+</script>
+
+</body>
+</html>

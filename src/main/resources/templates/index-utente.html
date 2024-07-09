@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benvenuto su TripHub!</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/stile.css">
+
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="navbar-left">
+        <a href="/utente/index" class="navbar-logo">TripHub</a>
+      </div>
+      <div class="navbar-center">
+        <a href="/utente/index" class="navbar-home">Home</a>
+        <a href="/utente/profilo" class="navbar-home">Profilo</a>
+        <a href="/utente/destinazioni" class="navbar-home">Destinazioni</a>
+
+      </div>
+      <div class="navbar-right">
+        <a href="/logout" class="navbar-logout-button">Logout</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<section class="home">
+  <div class="home-container">
+    <h1>Benvenuto su TripHub!</h1>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="search-input" placeholder="Inserisci la tua destinazione" onfocus="showDropdown()" oninput="filterDestinations()" required>
+      <button class="search-button" onclick="searchDestination()">Cerca</button>
+      <div id="dropdown-menu" class="dropdown-menu">
+        <ul class="list-group" id="destination-list">
+          <li th:each="destinazione : ${destinazioni}"
+              class="list-group-item"
+              th:id="'dest-' + ${destinazione.id}"
+              onclick="selectDestination(this)"
+              th:data-id="@{'/utente/destinazione/' + ${destinazione.id}}"
+              th:text="${destinazione.nome}">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h2>Qual è la tua destinazione?</h2>
+    <p>Esplora il mondo con TripHub e trova le migliori destinazioni per il tuo prossimo viaggio.</p>
+  </div>
+  <button class="publish-button" onclick="location.href='/utente/pubblica'">Condividi Esperienze!</button>
+  <button class="publish-button" onclick="location.href='/utente/destinazioni'">Scopri le nostre destinazioni!</button>
+</section>
+
+<script>
+  let selectedDestinationId = null;
+
+  function showDropdown() {
+    document.getElementById("dropdown-menu").style.display = "block";
+  }
+
+  function filterDestinations() {
+    var input, filter, ul, li, txtValue;
+    input = document.getElementById('search-input');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("destination-list");
+    li = ul.getElementsByTagName('li');
+
+    let hasResults = false;
+    for (let i = 0; i < li.length; i++) {
+      txtValue = li[i].textContent || li[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+        hasResults = true;
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+
+    document.getElementById("dropdown-menu").style.display = hasResults ? "block" : "none";
+  }
+
+  function selectDestination(element) {
+    var input = document.getElementById('search-input');
+    input.value = element.innerText;
+    selectedDestinationId = element.getAttribute('data-id');
+    document.getElementById("dropdown-menu").style.display = "none";
+  }
+
+  function searchDestination() {
+    if (selectedDestinationId) {
+      window.location.href = selectedDestinationId;
+    } else {
+      alert('Seleziona una destinazione dalla lista.');
+    }
+  }
+
+  document.addEventListener('click', function(event) {
+    var isClickInside = document.querySelector('.search-bar').contains(event.target);
+    if (!isClickInside) {
+      document.getElementById("dropdown-menu").style.display = "none";
+    }
+  });
+</script>
+</body>
+</html>

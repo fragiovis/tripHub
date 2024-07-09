@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pubblica un Nuovo Cibo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="/css/pubblica-item.css">
+
+</head>
+<body class="pubblic_item-page">
+<header>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="navbar-left">
+                <a href="/utente/index" class="navbar-logo">TripHub</a>
+            </div>
+            <div class="navbar-center">
+                <a href="/utente/index" class="navbar-home">Home</a>
+                <a href="/utente/profilo" class="navbar-home">Profilo</a>
+                <a href="/utente/destinazioni" class="navbar-home">Destinazioni</a>
+
+            </div>
+            <div class="navbar-right">
+                <a href="/logout" class="navbar-logout-button">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="main">
+    <div class="pubblica-form">
+        <h1>Pubblica un Nuovo Cibo</h1>
+        <form th:action="@{/utente/pubblica/cibo/{destinazioneId}(destinazioneId=${destinazione.id})}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="ciboEsistente">Scegli un Cibo Esistente:</label>
+                <select id="ciboEsistente" name="ciboEsistente">
+                    <option value="0">-- Seleziona un cibo --</option>
+                    <option th:each="cibo : ${cibi}" th:value="${cibo.id}" th:text="${cibo.nome}"></option>
+                </select>
+            </div>
+            <h3>Oppure aggiungi un nuovo cibo:</h3>
+            <div class="form-group">
+                <label for="nome">Nome Cibo:</label>
+                <input type="text" id="nome" name="nome">
+            </div>
+            <div class="form-group">
+                <label for="descrizione">Descrizione:</label>
+                <textarea id="descrizione" name="descrizione" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="immagine">Immagine:</label>
+                <input type="file" id="immagine" name="immagine" accept=".jpg, .jpeg, .png">
+            </div>
+            <button type="submit">Pubblica Cibo</button>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

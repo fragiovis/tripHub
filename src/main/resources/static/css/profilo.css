@@ -1,0 +1,126 @@
+.profilo-page {
+    background-image: url(../images/profilo_sfondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.overlay {
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    margin-left: 7rem;
+    margin-right: 7rem;
+}
+
+.user-info{
+    width: 40%;
+    background-color: rgba(51,51,51, 0.6);
+    margin-top: 3rem;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: white;
+}
+.user-info img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+}
+
+.user-info input{
+    border-radius: 10px;
+    width: 100%;
+}
+
+.itinerari-container{
+    width: 60%;
+    margin-top: 3rem;
+}
+
+.panel-container{
+    border-radius: 20px;
+    background-color: rgba(51,51,51,0.6);
+}
+
+.panel {
+    height: 7rem;
+    border-radius: 20px;
+    flex: 0 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer; /* Aggiunto per indicare che il pannello è cliccabile */
+    margin-top: 2rem;
+    color: white; /* Colore del testo in nero */
+}
+.panel:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Aggiunto per evidenziare il pannello al passaggio del mouse */
+}
+.panel-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+.panel-description {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.btn-modify, .btn-save {
+    background-color: rgba(204, 153, 0, 0.8);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.btn-modify:hover, .btn-save:hover{
+    background-color: #28a745;
+}
+
+.toggle-button {
+    background-color: rgb(204, 153, 0);
+    cursor: pointer;
+    align-items: center;
+    font-size: 1rem;
+    color: black; /* Colore del testo in nero */
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.toggle-button:hover {
+    background-color: #28a745;
+    border: none;
+    scale: 110%;
+    color: white;
+}
+
+.toggle-button.active{
+    background-color: rgb(204, 153, 0);
+}

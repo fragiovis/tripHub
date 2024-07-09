@@ -1,0 +1,99 @@
+.cercaItinerario-page {
+    background-image: url(../images/itinerario_sfondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.7;
+}
+.header-box {
+    background-color: rgba(51, 51, 51, 0.8); /* Giallo scuro con trasparenza */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-box h1{
+    color: white;
+    margin: 1.5rem;
+    font-weight: bold;
+    font-size: 4rem;
+}
+.overlay {
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+}
+.content {
+    background-color: rgba(204, 153, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: black;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+label {
+    font-weight: bold;
+}
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content h1{
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.main-content-text {
+    text-align: center;
+}
+.search-bar {
+    margin-top: 20px;
+}
+.itinerari-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 20px;
+}
+.itinerario-card {
+    background-color: rgba(51, 51, 51, 0.9);
+    width: 18%;
+    height: 300px;
+    overflow: hidden;
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+.itinerario-card h3{
+    font-weight: bold;
+    font-size: 1.75rem;
+    color: rgb(204, 153, 0);
+}
+
+.itinerario-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    scale: 110%;
+}

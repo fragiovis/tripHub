@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${destinazione.nome}">Destinazione</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/stile.css">
+  <link rel="stylesheet" href="/css/destinazione.css">
+
+</head>
+<body class="destinazione-page">
+<img th:src="@{${destinazione.immagine}}" class="background-image" alt="Immagine Destinazione">
+<header>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="navbar-left">
+        <a href="/utente/index" class="navbar-logo">TripHub</a>
+      </div>
+      <div class="navbar-center">
+        <a href="/utente/index" class="navbar-home">Home</a>
+        <a href="/utente/profilo" class="navbar-home">Profilo</a>
+        <a href="/utente/destinazioni" class="navbar-home">Destinazioni</a>
+
+      </div>
+      <div class="navbar-right">
+        <a href="/logout" class="navbar-logout-button">Logout</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="header-box">
+  <h1 th:text="${destinazione.nome}">Nome Destinazione</h1>
+  <p th:text="${destinazione.descrizione}">Descrizione della destinazione.</p>
+</div>
+
+<div class="btn btn-generaItinerario">
+  <a class="btn bottone" th:href="@{/utente/destinazione/{id}/itinerario(id=${destinazione.id})}">Genera un itinerario</a>
+</div>
+
+<div class="overlay">
+  <h2>Luoghi da visitare</h2>
+  <div class="panel-container">
+    <div class="panel" th:each="luogo : ${destinazione.luoghi}">
+      <img th:src="@{${luogo.immagine}}" alt="Immagine luogo">
+      <div class="panel-title" th:text="${luogo.nome}">Nome Luogo</div>
+      <div class="panel-description" th:text="${luogo.descrizione}">Descrizione luogo</div>
+    </div>
+  </div>
+
+  <h2>Attività</h2>
+  <div class="panel-container">
+    <div class="panel" th:each="attivita : ${destinazione.attivita}">
+      <img th:src="@{${attivita.immagine}}" alt="Immagine attività">
+      <div class="panel-title" th:text="${attivita.nome}">Nome Attività</div>
+      <div class="panel-description" th:text="${attivita.descrizione}">Descrizione attività</div>
+    </div>
+  </div>
+
+  <h2>Cibi da provare</h2>
+  <div class="panel-container">
+    <div class="panel" th:each="cibo : ${destinazione.cibi}">
+      <img th:src="@{${cibo.immagine}}" alt="Immagine cibo">
+      <div class="panel-title" th:text="${cibo.nome}">Nome Cibo</div>
+      <div class="panel-description" th:text="${cibo.descrizione}">Descrizione cibo</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

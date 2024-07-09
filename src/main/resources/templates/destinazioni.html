@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinazioni</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="/css/destinazioni.css">
+
+</head>
+<body class="destinazioni-page">
+<header>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="navbar-left">
+                <a href="/" class="navbar-logo">TripHub</a>
+            </div>
+            <div class="navbar-center">
+                <a href="/" class="navbar-home">Home</a>
+                <a href="/destinazioni" class="navbar-home">Destinazioni</a>
+            </div>
+            <div class="navbar-right">
+                <a href="/login" class="navbar-login-button">Login</a>
+                <a href="/register" class="navbar-register-button">Registrati</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="header-box">
+    <h1>Destinazioni</h1>
+</div>
+<div class="overlay">
+    <div class="panel-container">
+            <a class="panel" th:each="destinazione : ${destinazioni}" th:href="@{'/destinazione/' + ${destinazione.id}}">
+                <img th:src="@{${destinazione.immagine}}" alt="Immagine luogo">
+                <div class="panel-title" th:text="${destinazione.nome}">Nome Destinazione</div>
+                <div class="panel-description" th:text="${destinazione.descrizione}">Descrizione Destinazione</div>
+            </a>
+    </div>
+</div>
+</body>
+</html>

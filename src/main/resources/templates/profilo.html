@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo Utente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-3lOpzsOlRDV+u4KO8qPW4KszK9O00l72aRvM1LvukbKJYz5F6Wo7bYdVgYP7ix4rMuOHug8T1VUa3M6H63QStg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="/css/profilo.css">
+
+</head>
+<body class="profilo-page">
+<header>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="navbar-left">
+                <a href="/utente/index" class="navbar-logo">TripHub</a>
+            </div>
+            <div class="navbar-center">
+                <a href="/utente/index" class="navbar-home">Home</a>
+                <a href="/utente/profilo" class="navbar-home">Profilo</a>
+                <a href="/utente/destinazioni" class="navbar-home">Destinazioni</a>
+
+            </div>
+            <div class="navbar-right">
+                <a href="/logout" class="navbar-logout-button">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="overlay">
+    <div class="user-info">
+        <form id="user-info-form" action="/utente/profilo/modificaDati" method="post">
+            <div class="user-cont">
+                <img th:src="@{${utente.immagine}}" alt="Immagine Utente">
+                <p><strong>Username:</strong> <span th:text="${utente.username}">Username</span></p>
+                <p><strong>Nome:</strong> <input type="text" name="nome" value="" th:value="${utente.nome}" disabled></p>
+                <p><strong>Cognome:</strong> <input type="text" name="cognome" value="" th:value="${utente.cognome}" disabled></p>
+                <button type="button" class="btn-modify btn btn-primary" onclick="enableEditing()">Modifica Informazioni</button>
+                <button type="submit" class="btn-save btn btn-success" style="display: none;">Salva Informazioni</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="itinerari-container">
+        <button class="btn toggle-button" onclick="toggleItinerari()">
+            <span id="toggle-button-text">Mostra Itinerari Salvati</span>
+        </button>
+        <div id="itinerari-container" class="panel-container" style="display: none;">
+            <a th:each="itinerario : ${itinerari}" th:href="@{'/utente/itinerario/' + ${itinerario.id}}">
+                <div class="panel">
+                    <div class="panel-title" th:text="${itinerario.nome}">Nome Itinerario</div>
+                    <div class="panel-description" th:text="${itinerario.descrizione}">Descrizione itinerario</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function enableEditing() {
+        var inputs = document.querySelectorAll('#user-info-form input');
+        inputs.forEach(function(input) {
+            input.disabled = false;
+        });
+        document.querySelector('.btn-modify').style.display = 'none';
+        document.querySelector('.btn-save').style.display = 'inline-block';
+    }
+
+    function toggleItinerari() {
+        var container = document.getElementById('itinerari-container');
+        var buttonText = document.getElementById('toggle-button-text');
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'block';
+            buttonText.innerText = 'Nascondi Itinerari Salvati';
+        } else {
+            container.style.display = 'none';
+            buttonText.innerText = 'Mostra Itinerari Salvati';
+        }
+    }
+</script>
+
+</body>
+</html>
